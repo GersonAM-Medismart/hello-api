@@ -1,4 +1,4 @@
-# Etapa 1: build
+# Etapa 1: Compilación
 FROM golang:1.20 as builder
 
 WORKDIR /app
@@ -10,7 +10,7 @@ RUN go mod download
 COPY . ./
 RUN go build -o hello-api
 
-# Etapa 2: run (reemplazamos distroless por una imagen más flexible)
+# Etapa 2: Imagen final (más compatible que distroless)
 FROM debian:bullseye-slim
 
 WORKDIR /app
