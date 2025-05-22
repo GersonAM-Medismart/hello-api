@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TU_USUARIO/hello-api.git  # <- tu repo aquí
+    repoURL: https://github.com/GersonAM-Medismart/hello-api.git  # <- tu repo aquí
     targetRevision: HEAD
     path: k8s
   destination:

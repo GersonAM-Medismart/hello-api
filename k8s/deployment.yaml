@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: hello-api
-          image: TU_USUARIO/hello-api:latest  # Reemplaza con tu imagen en Docker Hub o GHCR
+          image: GersonAM-Medismart/hello-api:latest # Reemplaza con tu imagen en Docker Hub o GHCR
           ports:
             - containerPort: 8080
