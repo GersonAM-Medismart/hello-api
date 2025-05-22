@@ -10,8 +10,8 @@ RUN go mod download
 COPY . ./
 RUN go build -o hello-api
 
-# Etapa 2: run
-FROM gcr.io/distroless/base-debian11
+# Etapa 2: run (reemplazamos distroless por una imagen más flexible)
+FROM debian:bullseye-slim
 
 WORKDIR /app
 
