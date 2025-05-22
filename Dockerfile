@@ -1,22 +1,26 @@
-# Etapa 1: Compilación
-FROM golang:1.20 as builder
+# Etapa 1: compilación
+FROM golang:1.20-alpine AS builder
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . ./
-RUN go build -o hello-api
+# Copia todo el proyecto
+COPY . .
 
-# Etapa 2: Imagen final (más compatible que distroless)
-FROM debian:bullseye-slim
+# Compilación del binario estático
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hello-api ./main.go
 
-WORKDIR /app
+# Etapa 2: imagen mínima
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
 
 COPY --from=builder /app/hello-api .
 
 EXPOSE 8080
 
-ENTRYPOINT ["./hello-api"]
+CMD ["./hello-api"]
